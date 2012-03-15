@@ -1,0 +1,107 @@
+<html>
+  <head>
+		<title> Arrays - PHP-cursus</title>
+	</head>
+	<body>
+		<h1>Arrays</h1>
+		Arrays zijn variabelen waarin u meerdere andere variabelen kan opslaan<br><br>
+		<?php 
+			// arrays maken
+			$atlete=array("Smolders","Dejaeghere","Gevaert","Stals");
+			echo "Twee van onze topatletes: ".$atlete[0]." en ".$atlete[2]."<br><br>";
+			
+			$wta[] = "Justine Henin";
+			$wta[] = "Ana Ivanovic";
+			$wta[] = "Svetlana Kuznetsova";
+			$wta[] = "Jelena Jankovic";
+			$wta[] = "Maria Sharapova";
+			$wta[] = "Venus Williams";	
+			$wta[] = "Anna Tsjakvetadze";
+			$wta[] = "Daniela Hantuchova";
+			$wta[] = "Marion Bartioli";
+			$wta[] = "Serena Williams";
+			$wta[] = "Jelena Dementieva";
+			$wta[] = "Nadia Petrova";
+			$wta[] = "Tatiana Golovin";
+			$wta[] = "Patty Schnyder";
+			$wta[] = "Nicole Vaidisova";
+			echo "De nummer &eacute;&eacute;n in de WTA-ranking is ".$wta[0]."<br>"; // Mauresmo
+			echo "De nummer drie in de WTA-ranking is ".$wta[2]."<br><br>"; // Sharapova
+			
+			// associatieve array
+			$personeel=array("sales"=>3,"administratie"=>5,"it"=>2,"training"=>20);
+			echo "Op IT zijn er ".$personeel["it"]." personeelsleden<br><br>";
+
+			// snel een array bekijken
+			echo "<pre>";
+			print_r($atlete); echo "<br>";
+			print_r ($personeel);
+			echo "</pre>";
+
+			// werken met arrays
+			echo "<h3>WTA-ranking</h3>";
+			echo "\n<table border=\"1\" cellpadding=\"5\">";
+			$i=0;
+			while($wta[$i]){
+				echo "<tr><td>".($i+1)."</td><td>".$wta[$i]."</td></tr>";
+				$i++;
+			}
+			echo "</table>";
+			
+			echo "<h3>Personeelsbestand</h3>";
+			echo "\n<table border=\"1\" cellpadding=\"5\">";
+			reset($personeel);
+			$personeelstotaal=0;
+			while($personeelsaantal=current($personeel)){
+				echo "<tr><td>".key($personeel)."</td><td align=\"right\">".$personeelsaantal."</td></tr>";
+				$personeelstotaal+=$personeelsaantal;
+				next($personeel);
+			}
+			echo "<tr><td><b>Totaal</b></td><td align=\"right\">".$personeelstotaal."</td></tr>";
+			echo "</table><br>";
+			echo "Er zijn dus gemiddeld ".($personeelstotaal/count($personeel))." personeelsleden per afdeling.<br><br>";
+
+			//arrays sorteren			
+			echo "<h3>Alfabetisch sorteren in WTA-ranking</h3>";
+			$wta_backup = $wta;
+			echo "\$wta voor sort: <pre>"; print_r($wta); echo "</pre><br>";
+			sort($wta);
+			echo "\$wta na sort: <pre>"; print_r($wta); echo "</pre><br>";
+			rsort($wta);
+			echo "\$wta na rsort: <pre>"; print_r($wta); echo "</pre><br><br>";
+			
+			$wta=$wta_backup;
+			echo "\$wta voor sort: <pre>"; print_r($wta); echo "</pre><br>";
+			asort($wta);
+			echo "\$wta na asort: <pre>"; print_r($wta); echo "</pre><br>";
+			arsort($wta);
+			echo "\$wta na arsort: <pre>"; print_r($wta); echo "</pre><br>";
+
+			echo "<h3>WTA-ranking</h3>";
+			echo "\n<table border=\"1\" cellpadding=\"5\">";
+			$i=0;
+			while($wta[$i]){
+				echo "<tr><td>".($i+1)."</td><td>".$wta[$i]."</td></tr>";
+				$i++;
+			}
+			echo "</table><br>";
+			
+			//associatieve arrays sorteren			
+			echo "<h3>Personeelsbestand</h3>";
+			$personeel_backup=$personeel;
+			arsort($personeel); 
+			echo "\$personeel na arsort: <pre>"; print_r($personeel); echo"</pre>";
+			echo "<h3>Personeelsbestand volgens belangrijkheid</h3>";
+			echo "\n<table border=\"1\" cellpadding=\"5\">";
+			reset($personeel);
+			$personeelstotaal=0;
+			while($personeelsaantal=current($personeel)){
+				echo "<tr><td>".key($personeel)."</td><td align=\"right\">".$personeelsaantal."</td></tr>";
+				$personeelstotaal+=$personeelsaantal;
+				next($personeel);
+			}
+			echo "<tr><td><b>Totaal</b></td><td align=\"right\">".$personeelstotaal."</td></tr>";
+			echo "</table><br>";
+		?>
+	</body>
+</html>
